@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - RTX Bank</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ApexCharts.js para os gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- Three.js para o fundo interativo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Um preto um pouco mais suave */
+            color: #e5e7eb; /* Off-white para melhor leitura */
+        }
+        #interactive-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-link.active {
+            background-color: #1d4ed8; /* Azul escuro */
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .nav-link:hover {
+            background-color: #262626;
+        }
+        .nav-link.active:hover {
+             background-color: #1e40af;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #171717;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #404040;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #525252;
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+
+    <canvas id="interactive-bg"></canvas>
+
+    <div class="flex h-screen bg-black/50">
+        <!-- SIDEBAR DE NAVEGAÇÃO -->
+        <aside id="sidebar" class="w-64 bg-black/80 backdrop-blur-sm flex-shrink-0 p-4 border-r border-gray-800 flex-col justify-between hidden md:flex">
+            <div>
+                <div class="flex items-center justify-center mb-10">
+                    <img src="https://rtxholding.com.br/wp-content/uploads/2025/04/Icone_Grupo_RTX_1.png" alt="Logo RTX" class="h-50">
+                </div>
+                <nav class="space-y-2">
+                    <a href="#dashboard" class="nav-link flex items-center py-2.5 px-4 rounded-lg transition duration-200">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        Dashboard
+                    </a>
+                    <a href="#investimentos" class="nav-link flex items-center py-2.5 px-4 rounded-lg transition duration-200">
+                         <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        Investimentos
+                    </a>
+                    <a href="#conta" class="nav-link flex items-center py-2.5 px-4 rounded-lg transition duration-200">
+                         <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                        Conta
+                    </a>
+                    <a href="#transferencias" class="nav-link flex items-center py-2.5 px-4 rounded-lg transition duration-200">
+                         <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                        Transferências
+                    </a>
+                </nav>
+            </div>
+             <div class="mt-auto">
+                <button class="w-full flex items-center justify-center bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-black/80 backdrop-blur-sm border-b border-gray-800 p-4 flex justify-between items-center md:hidden">
+                 <img src="https://rtxholding.com.br/wp-content/uploads/2025/04/Icone_Grupo_RTX_1.png" alt="Logo RTX" class="h-10">
+                 <button id="mobile-menu-button" class="text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </header>
+            <div id="mobile-menu" class="hidden md:hidden bg-black/90 p-4">
+                 <a href="#dashboard" class="nav-link block py-2 px-4 rounded">Dashboard</a>
+                 <a href="#investimentos" class="nav-link block py-2 px-4 rounded">Investimentos</a>
+                 <a href="#conta" class="nav-link block py-2 px-4 rounded">Conta</a>
+                 <a href="#transferencias" class="nav-link block py-2 px-4 rounded">Transferências</a>
+            </div>
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6 md:p-8">
+                <!-- SEÇÃO DASHBOARD -->
+                <section id="dashboard" class="content-section">
+                    <h1 class="text-3xl font-bold text-white mb-6">Dashboard</h1>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                        <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                            <h2 class="text-gray-400 text-sm font-medium mb-2">Patrimônio Total</h2>
+                            <p class="text-4xl font-extrabold text-white">R$ 173.161,61</p>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                            <h2 class="text-gray-400 text-sm font-medium mb-2">Lucro/Prejuízo (Total)</h2>
+                            <p class="text-4xl font-extrabold text-green-400">+ R$ 18.980,15</p>
+                        </div>
+                         <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                            <h2 class="text-gray-400 text-sm font-medium mb-2">Saldo em Conta</h2>
+                            <p class="text-4xl font-extrabold text-white">R$ 15.234,76</p>
+                        </div>
+                    </div>
+                     <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                        <h2 class="text-xl font-bold text-white mb-4">Composição da Carteira</h2>
+                        <div class="space-y-4">
+                           <!-- Item Carteira -->
+                            <div>
+                               <div class="flex justify-between mb-1">
+                                   <span class="text-base font-medium text-blue-300">Fundos Multimercado</span>
+                                   <span class="text-sm font-medium text-blue-300">65%</span>
+                               </div>
+                               <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                   <div class="bg-blue-600 h-2.5 rounded-full" style="width: 65%"></div>
+                               </div>
+                           </div>
+                           <!-- Item Carteira -->
+                           <div>
+                               <div class="flex justify-between mb-1">
+                                   <span class="text-base font-medium text-green-300">Ações</span>
+                                   <span class="text-sm font-medium text-green-300">26%</span>
+                               </div>
+                               <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                   <div class="bg-green-500 h-2.5 rounded-full" style="width: 26%"></div>
+                               </div>
+                           </div>
+                            <!-- Item Carteira -->
+                           <div>
+                               <div class="flex justify-between mb-1">
+                                   <span class="text-base font-medium text-yellow-300">Criptoativos</span>
+                                   <span class="text-sm font-medium text-yellow-300">9%</span>
+                               </div>
+                               <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                   <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 9%"></div>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEÇÃO INVESTIMENTOS -->
+                <section id="investimentos" class="content-section">
+                    <h1 class="text-3xl font-bold text-white mb-6">Performance dos Investimentos</h1>
+                    <div class="bg-gray-900 p-4 sm:p-6 rounded-xl border border-gray-800">
+                        <div id="portfolio-chart"></div>
+                    </div>
+                </section>
+
+                <!-- SEÇÃO CONTA -->
+                <section id="conta" class="content-section">
+                     <h1 class="text-3xl font-bold text-white mb-6">Extrato da Conta</h1>
+                     <div class="bg-gray-900 rounded-xl border border-gray-800">
+                         <ul class="divide-y divide-gray-800">
+                             <li class="p-4 flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="bg-green-500/20 p-2 rounded-full mr-4">
+                                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-white">Transferência Recebida</p>
+                                        <p class="text-sm text-gray-400">20 JUN 2024 - Pix de João da Silva</p>
+                                    </div>
+                                </div>
+                                <p class="font-bold text-green-400 text-lg">+ R$ 1.200,00</p>
+                             </li>
+                              <li class="p-4 flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="bg-red-500/20 p-2 rounded-full mr-4">
+                                        <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-white">Aplicação em Fundo</p>
+                                        <p class="text-sm text-gray-400">19 JUN 2024 - RTX Multimercado Alpha</p>
+                                    </div>
+                                </div>
+                                <p class="font-bold text-red-400 text-lg">- R$ 5.000,00</p>
+                             </li>
+                              <li class="p-4 flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="bg-red-500/20 p-2 rounded-full mr-4">
+                                        <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-white">Pagamento de Fatura</p>
+                                        <p class="text-sm text-gray-400">18 JUN 2024 - Cartão de Crédito</p>
+                                    </div>
+                                </div>
+                                <p class="font-bold text-red-400 text-lg">- R$ 2.845,10</p>
+                             </li>
+                         </ul>
+                     </div>
+                </section>
+
+                <!-- SEÇÃO TRANSFERÊNCIAS -->
+                <section id="transferencias" class="content-section">
+                     <h1 class="text-3xl font-bold text-white mb-6">Realizar Transferência</h1>
+                     <div class="max-w-xl mx-auto bg-gray-900 p-8 rounded-xl border border-gray-800">
+                        <form>
+                            <div class="mb-5">
+                                <label for="valor" class="block text-gray-300 text-sm font-bold mb-2">Valor</label>
+                                <input type="text" id="valor" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg py-3 px-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="R$ 0,00">
+                            </div>
+                            <div class="mb-5">
+                                <label for="chave-pix" class="block text-gray-300 text-sm font-bold mb-2">Chave Pix ou Dados Bancários</label>
+                                <input type="text" id="chave-pix" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg py-3 px-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Digite a chave ou os dados">
+                            </div>
+                            <div class="mb-8">
+                                <label for="descricao" class="block text-gray-300 text-sm font-bold mb-2">Descrição (Opcional)</label>
+                                <input type="text" id="descricao" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg py-3 px-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <button type="button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 text-lg">
+                                Continuar
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- GRÁFICO DE PORTFÓLIO COM APEXCHARTS ---
+        var chartOptions = {
+            series: [{
+                name: 'Patrimônio',
+                data: [150123, 152456, 151890, 155678, 160123, 162543, 161987, 165321, 168901, 170543, 172345, 173161]
+            }],
+            chart: {
+                type: 'area',
+                height: 350,
+                zoom: { enabled: false },
+                toolbar: { show: false },
+                foreColor: '#9ca3af' // Cor do texto dos eixos (cinza)
+            },
+            dataLabels: { enabled: false },
+            stroke: { 
+                curve: 'smooth',
+                width: 2
+            },
+            colors: ['#2563eb'], // Azul para a linha e área
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.1,
+                    stops: [0, 100]
+                }
+            },
+            grid: {
+                borderColor: '#374151', // Cor das linhas do grid (cinza escuro)
+                strokeDashArray: 4
+            },
+            tooltip: {
+                theme: 'dark',
+                 x: {
+                    format: 'MMM yyyy'
+                 },
+                 y: {
+                    formatter: function(val) {
+                        return "R$ " + val.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                    }
+                }
+            },
+            xaxis: {
+                type: 'datetime',
+                categories: [
+                    "2023-07-01T00:00:00.000Z", "2023-08-01T00:00:00.000Z", "2023-09-01T00:00:00.000Z", 
+                    "2023-10-01T00:00:00.000Z", "2023-11-01T00:00:00.000Z", "2023-12-01T00:00:00.000Z",
+                    "2024-01-01T00:00:00.000Z", "2024-02-01T00:00:00.000Z", "2024-03-01T00:00:00.000Z",
+                    "2024-04-01T00:00:00.000Z", "2024-05-01T00:00:00.000Z", "2024-06-01T00:00:00.000Z"
+                ],
+                labels: {
+                    style: { colors: '#9ca3af' }
+                },
+                 axisBorder: { show: false },
+                 axisTicks: { show: false }
+            },
+            yaxis: {
+                labels: {
+                    style: { colors: '#9ca3af' },
+                    formatter: (value) => { return `R$ ${value/1000}k` }
+                }
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#portfolio-chart"), chartOptions);
+        chart.render();
+
+        // --- NAVEGAÇÃO SPA (SINGLE PAGE APPLICATION) ---
+        const allNavLinks = document.querySelectorAll('.nav-link');
+        const contentSections = document.querySelectorAll('.content-section');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function showSection(hash) {
+            contentSections.forEach(section => {
+                section.style.display = 'none';
+            });
+            const activeSection = document.querySelector(hash);
+            if (activeSection) {
+                activeSection.style.display = 'block';
+            }
+            allNavLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === hash) {
+                    link.classList.add('active');
+                }
+            });
+            mobileMenu.classList.add('hidden');
+        }
+
+        function handleNavClick(e) {
+            e.preventDefault();
+            const hash = e.currentTarget.getAttribute('href');
+            window.location.hash = hash;
+        }
+
+        allNavLinks.forEach(link => link.addEventListener('click', handleNavClick));
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash || '#dashboard';
+            showSection(hash);
+        });
+
+        const initialHash = window.location.hash || '#dashboard';
+        showSection(initialHash);
+
+
+        // --- FUNDO INTERATIVO COM THREE.JS (SUTIL) ---
+        let scene, camera, renderer, stars;
+        const canvas = document.getElementById('interactive-bg');
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.z = 1;
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const starGeo = new THREE.BufferGeometry();
+            const starVertices = [];
+            for (let i = 0; i < 10000; i++) {
+                const x = (Math.random() - 0.5) * 2000;
+                const y = (Math.random() - 0.5) * 2000;
+                const z = (Math.random() - 0.5) * 2000;
+                starVertices.push(x, y, z);
+            }
+            starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+            
+            let starMaterial = new THREE.PointsMaterial({
+                color: 0x404040, // Cinza escuro
+                size: 0.4,
+                transparent: true,
+                opacity: 0.5
+            });
+
+            stars = new THREE.Points(starGeo, starMaterial);
+            scene.add(stars);
+
+            window.addEventListener('resize', onWindowResize, false);
+            animate();
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            stars.rotation.y += 0.00005; // Movimento muito lento
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+
+        init();
+    });
+    </script>
+</body>
+</html>
