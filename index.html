@@ -97,6 +97,10 @@
                          <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
                         Transferências
                     </a>
+                    <a href="#notificacoes" class="nav-link flex items-center py-2.5 px-4 rounded-lg transition duration-200">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                        Notificações
+                    </a>
                 </nav>
             </div>
              <div class="mt-auto">
@@ -120,12 +124,20 @@
                  <a href="#investimentos" class="nav-link block py-2 px-4 rounded">Investimentos</a>
                  <a href="#conta" class="nav-link block py-2 px-4 rounded">Conta</a>
                  <a href="#transferencias" class="nav-link block py-2 px-4 rounded">Transferências</a>
+                 <a href="#notificacoes" class="nav-link block py-2 px-4 rounded">Notificações</a>
             </div>
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto p-6 md:p-8">
                 <!-- SEÇÃO DASHBOARD -->
                 <section id="dashboard" class="content-section">
-                    <h1 class="text-3xl font-bold text-white mb-6">Dashboard</h1>
+                    <div class="flex items-center mb-6">
+                        <img src="https://placehold.co/64x64/2563eb/ffffff?text=U" alt="User Avatar" class="rounded-full mr-4 border-2 border-blue-500">
+                        <div>
+                            <h1 class="text-3xl font-bold text-white">Olá, Usuário RTX!</h1>
+                            <p class="text-gray-400">Bem-vindo(a) de volta ao seu painel.</p>
+                        </div>
+                    </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                         <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
                             <h2 class="text-gray-400 text-sm font-medium mb-2">Patrimônio Total</h2>
@@ -140,6 +152,38 @@
                             <p class="text-4xl font-extrabold text-white">R$ 15.234,76</p>
                         </div>
                     </div>
+
+                    <!-- Novos ícones de Ações Rápidas -->
+                    <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 mb-6">
+                        <h2 class="text-xl font-bold text-white mb-4">Ações Rápidas</h2>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                            <a href="#transferencias" class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-blue-600 transition duration-300 group">
+                                <svg class="w-8 h-8 text-blue-400 mb-2 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14l-4-4 1.41-1.41L10 13.17l6.59-6.59L18 8l-8 8z"/></svg>
+                                <span class="text-sm font-medium text-gray-300 group-hover:text-white">Pix</span>
+                            </a>
+                            <a href="#" class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-blue-600 transition duration-300 group">
+                                <svg class="w-8 h-8 text-blue-400 mb-2 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 3H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V9l-7-6zM6 21V5h6v7h7v9H6z"/></svg>
+                                <span class="text-sm font-medium text-gray-300 group-hover:text-white">Pagar QR Code</span>
+                            </a>
+                            <a href="#" class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-blue-600 transition duration-300 group">
+                                <svg class="w-8 h-8 text-blue-400 mb-2 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4V8h16v10zm-12-8h8v2H8zm0 4h8v2H8z"/></svg>
+                                <span class="text-sm font-medium text-gray-300 group-hover:text-white">Cartão</span>
+                            </a>
+                            <a href="#" class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-blue-600 transition duration-300 group">
+                                <svg class="w-8 h-8 text-blue-400 mb-2 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                                <span class="text-sm font-medium text-gray-300 group-hover:text-white">Cobranças</span>
+                            </a>
+                            <a href="#transferencias" class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-blue-600 transition duration-300 group">
+                                <svg class="w-8 h-8 text-blue-400 mb-2 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 3L5 6.99h3V14h2V6.99h3L9 3zm7 14.01V10h-2v7.01h-3L15 21l4-3.99h-3z"/></svg>
+                                <span class="text-sm font-medium text-gray-300 group-hover:text-white">Transferência</span>
+                            </a>
+                            <a href="#notificacoes" class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-blue-600 transition duration-300 group">
+                                <svg class="w-8 h-8 text-blue-400 mb-2 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6V9c0-3.25-2.25-6-5-6S7 5.75 7 9v7l-2 2v1h14v-1l-2-2z"/></svg>
+                                <span class="text-sm font-medium text-gray-300 group-hover:text-white">Notificações</span>
+                            </a>
+                        </div>
+                    </div>
+
                      <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
                         <h2 class="text-xl font-bold text-white mb-4">Composição da Carteira</h2>
                         <div class="space-y-4">
@@ -180,8 +224,93 @@
                 <!-- SEÇÃO INVESTIMENTOS -->
                 <section id="investimentos" class="content-section">
                     <h1 class="text-3xl font-bold text-white mb-6">Performance dos Investimentos</h1>
-                    <div class="bg-gray-900 p-4 sm:p-6 rounded-xl border border-gray-800">
+                    <p class="text-gray-300 mb-6">
+                        Acompanhe o desempenho detalhado de seus investimentos ao longo do tempo. Nossos gráficos e tabelas oferecem uma visão clara do crescimento do seu patrimônio e da performance de cada categoria de ativo.
+                    </p>
+                    <div class="bg-gray-900 p-4 sm:p-6 rounded-xl border border-gray-800 mb-6">
+                        <h2 class="text-xl font-bold text-white mb-4">Gráfico de Patrimônio Total</h2>
                         <div id="portfolio-chart"></div>
+                        <p class="text-gray-400 text-sm mt-4">
+                            Este gráfico mostra a evolução do seu patrimônio total nos últimos 12 meses, destacando as flutuações e a tendência de crescimento.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-900 p-4 sm:p-6 rounded-xl border border-gray-800 mb-6">
+                        <h2 class="text-xl font-bold text-white mb-4">Performance por Categoria de Ativo</h2>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-700">
+                                <thead class="bg-gray-800">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Ativo</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Valor Atual</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Lucro/Prejuízo (%)</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Últimos 30 Dias</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-800">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">Fundos Multimercado</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">R$ 112.555,00</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400">+10.5%</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400">+2.1%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">Ações</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">R$ 45.000,00</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-red-400">-2.3%</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400">+0.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">Criptoativos</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">R$ 15.606,61</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400">+15.2%</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-red-400">-1.5%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-4">
+                            Esta tabela detalha o valor atual, o lucro/prejuízo percentual desde o início do investimento e a performance nos últimos 30 dias para cada tipo de ativo.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-900 p-4 sm:p-6 rounded-xl border border-gray-800">
+                        <h2 class="text-xl font-bold text-white mb-4">Histórico de Transações de Investimento</h2>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-700">
+                                <thead class="bg-gray-800">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Data</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Tipo</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Ativo</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-800">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">19 JUN 2024</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-red-400">Aplicação</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white">RTX Multimercado Alpha</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-red-400">- R$ 5.000,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">10 MAI 2024</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400">Resgate</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white">Ações Tech Growth</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400">+ R$ 1.500,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">01 ABR 2024</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-red-400">Aplicação</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white">Bitcoin (BTC)</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-red-400">- R$ 2.000,00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-4">
+                            Visualize todas as suas transações de investimento, incluindo aplicações e resgates, para um controle financeiro completo.
+                        </p>
                     </div>
                 </section>
 
@@ -251,6 +380,45 @@
                                 Continuar
                             </button>
                         </form>
+                    </div>
+                </section>
+
+                <!-- SEÇÃO NOTIFICAÇÕES -->
+                <section id="notificacoes" class="content-section">
+                    <h1 class="text-3xl font-bold text-white mb-6">Suas Notificações</h1>
+                    <div class="bg-gray-900 rounded-xl border border-gray-800 p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-start bg-gray-800 p-4 rounded-lg shadow-md">
+                                <div class="flex-shrink-0 mr-4">
+                                    <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-white">Alerta de Segurança: Nova tentativa de login</p>
+                                    <p class="text-sm text-gray-400">Detectamos uma tentativa de login em sua conta de um novo dispositivo. Se não foi você, entre em contato imediatamente.</p>
+                                    <p class="text-xs text-gray-500 mt-1">20 JUN 2024, 14:30</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start bg-gray-800 p-4 rounded-lg shadow-md">
+                                <div class="flex-shrink-0 mr-4">
+                                    <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-white">Transação Confirmada: Pix Recebido</p>
+                                    <p class="text-sm text-gray-400">Você recebeu um Pix de R$ 1.200,00 de João da Silva.</p>
+                                    <p class="text-xs text-gray-500 mt-1">20 JUN 2024, 10:15</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start bg-gray-800 p-4 rounded-lg shadow-md">
+                                <div class="flex-shrink-0 mr-4">
+                                    <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-white">Lembrete: Fatura do cartão de crédito próxima</p>
+                                    <p class="text-sm text-gray-400">Sua fatura do cartão de crédito com vencimento em 25/06/2024 está disponível para pagamento.</p>
+                                    <p class="text-xs text-gray-500 mt-1">18 JUN 2024, 09:00</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </main>
@@ -358,6 +526,11 @@
 
         allNavLinks.forEach(link => link.addEventListener('click', handleNavClick));
 
+        // Adiciona evento de clique para os novos botões de ação rápida
+        document.querySelectorAll('.grid.grid-cols-2 a').forEach(button => {
+            button.addEventListener('click', handleNavClick);
+        });
+
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
@@ -424,3 +597,4 @@
     </script>
 </body>
 </html>
+
